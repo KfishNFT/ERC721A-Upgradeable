@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import './interfaces/draft-IERC1822.sol';
+import './IERC721AUUPSUpgradeable.sol';
 import './ERC721AUpgradeable.sol';
 
 /**
@@ -15,7 +15,7 @@ import './ERC721AUpgradeable.sol';
  * The {_authorizeUpgrade} function must be overridden to include access restriction to the upgrade mechanism.
  *
  */
-abstract contract ERC721A_UUPSUpgradeable is IERC1822Proxiable, ERC721AUpgradeable {
+abstract contract ERC721AUUPSUpgradeable is IERC721AUUPSUpgradeable, ERC721AUpgradeable {
     struct AddressSlot {
         address value;
     }
@@ -29,7 +29,7 @@ abstract contract ERC721A_UUPSUpgradeable is IERC1822Proxiable, ERC721AUpgradeab
     bytes32 private constant _ROLLBACK_SLOT = 0x4910fdfa16fed3260ed0e7147f7cc6da11a60208b5b9406d12a635614ffd9143;
     bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
 
-    event Upgraded(address indexed implementation);
+
     /**
      * @dev Check that the execution is being performed through a delegatecall call and that the execution context is
      * a proxy contract with an implementation (as defined in ERC1967) pointing to self. This should only be the case
@@ -125,7 +125,7 @@ abstract contract ERC721A_UUPSUpgradeable is IERC1822Proxiable, ERC721AUpgradeab
         if (getBooleanSlot(_ROLLBACK_SLOT).value) {
             _setImplementation(newImplementation);
         } else {
-            try IERC1822Proxiable(newImplementation).proxiableUUID() returns (bytes32 slot) {
+            try IERC721AUUPSUpgradeable(newImplementation).proxiableUUID() returns (bytes32 slot) {
                 require(slot == _IMPLEMENTATION_SLOT, 'ERC1967Upgrade: unsupported proxiableUUID');
             } catch {
                 revert('ERC1967Upgrade: new implementation is not UUPS');
