@@ -4,7 +4,7 @@
 
 pragma solidity ^0.8.4;
 
-import './IERC721AQueryableUpgradeable.sol';
+import './IERC721AQueryableUUPSUpgradeable.sol';
 import '../ERC721AUUPSUpgradeable.sol';
 import '../ERC721A__Initializable.sol';
 
@@ -12,10 +12,10 @@ import '../ERC721A__Initializable.sol';
  * @title ERC721A Queryable
  * @dev ERC721A subclass with convenience query functions.
  */
-abstract contract ERC721AQueryableUpgradeable is
+abstract contract ERC721AQueryableUUPSUpgradeable is
     ERC721A__Initializable,
     ERC721AUUPSUpgradeable,
-    IERC721AQueryableUpgradeable
+    IERC721AQueryableUUPSUpgradeable
 {
     function __ERC721AQueryable_init() internal onlyInitializingERC721A {
         __ERC721AQueryable_init_unchained();

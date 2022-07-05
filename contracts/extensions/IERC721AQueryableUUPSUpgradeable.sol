@@ -9,7 +9,7 @@ import '../IERC721AUUPSUpgradeable.sol';
 /**
  * @dev Interface of an ERC721AQueryable compliant contract.
  */
-interface IERC721AQueryableUpgradeable is IERC721AUUPSUpgradeable {
+interface IERC721AQueryableUUPSUpgradeable is IERC721AUUPSUpgradeable {
     /**
      * Invalid query range (`start` >= `stop`).
      */
